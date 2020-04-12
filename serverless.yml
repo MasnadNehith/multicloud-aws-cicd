@@ -1,0 +1,35 @@
+service: multicloudawscicd
+app: bakery-sales-app
+org: masnadnehithsls
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: ${opt:stage,'local'}
+  region: us-east-1
+  environment:
+    MONGODB: ${self:custom.MONGODB.${self:provider.stage}}
+
+custom:
+  MONGODB:
+    local: 'mongodb://localhost:27017'
+    dev: 'mongodb+srv://masnad:Qwerty123456@cluster0-xwosk.gcp.mongodb.net/test?retryWrites=true&w=majority'
+
+functions:
+  getItem:
+    handler: handler.getItem
+    events:
+      - http:
+          method: get
+          path: getItem
+          cors: true
+  buyItem:
+    handler: handler.buyItem
+    events:
+      - http:
+          method: post
+          path: buyItem
+          cors: true
