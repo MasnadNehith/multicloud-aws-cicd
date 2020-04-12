@@ -8,7 +8,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: ${opt:stage,'local'}
+  stage: ${opt:stage,'dev'}
   region: us-east-1
   environment:
     MONGODB: ${self:custom.MONGODB.${self:provider.stage}}
