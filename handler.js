@@ -6,7 +6,7 @@ var stripe = require('stripe')('sk_test_Noga6LDIMjQ2Ze2GGkhbusTL00TpryWaZD');
 const getItem = async(event) => {
   const client = await MongoClient.connect(url, {useNewUrlParser:true, useUnifiedTopology:true});
     if(!client){
-      return { statusCode: 400, body: JSON.stringify('No client found')};
+      return { statusCode: 400, body: JSON.stringify('Client not found')};
     }
     let status;
     try{
